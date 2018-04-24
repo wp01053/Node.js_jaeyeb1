@@ -1,12 +1,9 @@
-let nport=8000;
-let sHost='localhost'
-const myServer = require('./myServer');
-const myRouter = require('./myrouter');
-const myHandlers = require('./myhandlers');
+console.log('Node.js version : ' + process.version);
+console.log(process.memoryUsage());
+console.log(process.env);
+//console.log(module);
 
-let handle = {};
-handle['/'] = myHandlers.start;
-handle['/start'] = myHandlers.start;
-handle['/hello'] = myHandlers.hello;
-
-myServer.start(nport, sHost, myRouter.route, handle);
+const circle = require('./circle');
+console.log('Area of ac circle =' + circle.area(3)); //모듈을 사용한것
+console.log('Circumference of ac circle =' + circle.circum(3));
+console.log('Pi =' + circle.pi);

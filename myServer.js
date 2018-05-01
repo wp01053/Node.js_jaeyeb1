@@ -3,15 +3,21 @@ const url = require('url');
 const sHost = 'localhost';
 const nPort = 8000;
 
-function start(route, handle) {
- function onRequest(req, res) {
- console.log('Request received.');
- let sPathname = url.parse(req.url).pathname;
- console.log('Request for ' + sPathname + ' received.');
- route(sPathname, handle, res);
+function start(port, hostname, route, handle) {
+    let sPostData = '';
+    function onRequest(req, res) {
+        let sPathname = url.parse(req.url).pathname;
+        req.setEncoding('utf8');
+        req.addListener('data', function (postDataChunk) {
+            sPostData += postDataChunk;
+            console.log('POST data chunk: ' + postDataChunk);
+        });
+        req.addListener('end', 
+        route(sPathname, handle, res, sPostData));
     }
- http.createServer(onRequest).listen(nPort, sHost);
- console.log('Server running at http://' + sHost + ':' + nPort);
 }
+http.createServer(onRequest).listen(nPort, sHost);
+console.log('Server running at http://' + sHost + ':' + nPort);
 
-exports.start = start;
+
+exports.start = s

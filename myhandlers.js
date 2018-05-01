@@ -1,8 +1,13 @@
 function start(){
-    return 'Hello, start!';
+    res.writeHead(200, {'Content-Type' :'texts/html' });
+    res.write('Hello, start!');
+    res.end();    
 }
 function hello(){
-    return 'Hello, hello!';
+    res.writeHead(200, {'Content-Type' :'texts/html' });
+    res.write('Hello, hello!');
+    res.end();    
 }
+
 exports.start =start;
 exports.hello = hello;

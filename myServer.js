@@ -12,12 +12,13 @@ function start(port, hostname, route, handle) {
             sPostData += postDataChunk;
             console.log('POST data chunk: ' + postDataChunk);
         });
-        req.addListener('end', 
-        route(sPathname, handle, res, sPostData));
+        req.addListener('end', function () {
+            route(sPathname, handle, res, sPostData);
+        });
     }
+    http.createServer(onRequest).listen(nPort, hostname);
+    console.log('Server running at http://' + sHost + ':' + nPort);
 }
-http.createServer(onRequest).listen(nPort, sHost);
-console.log('Server running at http://' + sHost + ':' + nPort);
 
 
-exports.start = s
+    exports.start = start;
